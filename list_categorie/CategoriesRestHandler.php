@@ -1,13 +1,13 @@
 <?php
-require_once("SimpleRestProduse.php");
-require_once("Products.php");
+require_once("SimpleRest.php");
+require_once("Categories.php");
 		
-class ProductsRestHandler extends SimpleRestProduse {
+class CategoriesRestHandler extends SimpleRest {
 
-	function getAllProducts() {	
+	function getAllCategories() {	
 
-		$products = new Products();
-		$rawData = $products->getAllProducts();
+		$categories = new categories();
+		$rawData = $categories->getAllCategories();
 
 		if(empty($rawData)) {
 			$statusCode = 404;
@@ -30,8 +30,10 @@ class ProductsRestHandler extends SimpleRestProduse {
 	}
 	
 	function add() {	
-		$products = new Products();
-		$rawData = $products->addProducts();
+		$categories = new Categories();
+		$json = file_get_contents('php://input');
+		$values = json_decode($json, true);
+		$rawData = $categories->addCategories($values);
 		if(empty($rawData)) {
 			$statusCode = 404;
 			$rawData = array('success' => 0);		
@@ -45,13 +47,13 @@ class ProductsRestHandler extends SimpleRestProduse {
 				
 		if(strpos($requestContentType,'application/json') !== false){
 			$response = $this->encodeJson($result);
-			echo $response;
+      echo $response;
 		}
 	}
 
-	function deleteProductsById() {	
-		$products = new Products();
-		$rawData = $products->deleteProducts();
+	function deleteCategoriesById() {	
+		$catgories = new Categories();
+		$rawData = $categories->deleteCategories();
 		
 		if(empty($rawData)) {
 			$statusCode = 404;
@@ -70,9 +72,9 @@ class ProductsRestHandler extends SimpleRestProduse {
 		}
 	}
 	
-	function editProductsById() {	
-		$products = new products();
-		$rawData = $products->editProducts();
+	function editCategoriesById() {	
+		$categories = new categories();
+		$rawData = $categories->editCategories();
 		if(empty($rawData)) {
 			$statusCode = 404;
 			$rawData = array('success' => 0);		
