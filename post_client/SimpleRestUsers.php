@@ -3,7 +3,7 @@
 A simple RESTful webservices base class
 Use this as a template and build upon it
 */
-class SimpleRest {
+class SimpleRestUsers {
 	
 	private $httpVersion = "HTTP/1.1";
 

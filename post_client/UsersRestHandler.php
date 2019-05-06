@@ -1,8 +1,8 @@
 <?php
-require_once("SimpleRest.php");
+require_once("SimpleRestUsers.php");
 require_once("Users.php");
 		
-class UsersRestHandler extends SimpleRest {
+class UsersRestHandler extends SimpleRestUsers {
 
 	function getAllUsers() {	
 

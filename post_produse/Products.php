@@ -23,6 +23,8 @@ Class Products {
 				$price = '';
 				$discount = '';
 				$descriere = '';
+				$categories_id = '';
+				
 			if(isset($_POST['price'])){
 				$model = $_POST['price'];
 			}
@@ -32,7 +34,10 @@ Class Products {
 			if(isset($_POST['descriere'])){
 				$color = $_POST['descriere'];
 			}			
-			$query = "insert into products (name,price, discount, descriere) values ('" . $name ."','". $price ."','" . $discount ."','". $descriere ."')";
+				if(isset($_POST['categories_id'])){
+				$color = $_POST['categories_id'];
+			}
+			$query = "insert into products (name,price, discount, descriere,categories_id) values ('" . $name ."','". $price ."','" . $discount ."','". $descriere ."', '". $categories_id ."')";
 			$dbcontroller = new DBController();
 			$result = $dbcontroller->executeQuery($query);
 			if($result != 0){
@@ -61,7 +66,8 @@ Class Products {
 			$price = $_POST['price'];
 			$discount = $_POST['discount'];
 			$descriere = $_POST['descriere'];
-			$query = "UPDATE products SET name = '".$name."',price ='". $price ."',discount = '". $discount ."', descriere = '". $descriere ."' WHERE id = ".$_GET['id'];
+			$categories_id = $_POST['categories_id'];
+			$query = "UPDATE products SET name = '".$name."',price ='". $price ."',discount = '". $discount ."', descriere = '". $descriere ."', categories_id = '". $categories_id ."' WHERE id = ".$_GET['id'];
 		}
 		$dbcontroller = new DBController();
 		$result= $dbcontroller->executeQuery($query);
